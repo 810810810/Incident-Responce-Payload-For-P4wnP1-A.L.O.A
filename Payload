@@ -1,25 +1,61 @@
-layout('us')
-press("GUI r")
-delay(500)
-type("powershell Start-Process powershell -Verb runAs\n")
-delay(1000)
-press("SHIFT TAB")
-delay(100)
-press("ENTER")
-delay(500)
-type("Invoke-WebRequest -Uri 'https://www.clamav.net/downloads/production/clamav-0.104.0-x64.msi' -OutFile 'clamav.msi'\n")
-press("ENTER")
-delay(5000)
-type("msiexec /i clamav.msi /qb")
-press("ENTER")
-delay(10000)
-type("Start-Process 'C:\\Program Files\\ClamAV\\clamscan.exe' -ArgumentList '-r -i C:\\' -Verb RunAs")
-press("ENTER")
-delay(3600000) // scan for 1 hour
-type("Start-Process 'C:\\Program Files\\ClamAV\\clamscan.exe' -ArgumentList '-r --remove C:\\' -Verb RunAs")
-press("ENTER")
-delay(1800000) // remove viruses for 30 minutes
-type("msiexec /x 'C:\\Program Files\\ClamAV\\uninstall.exe' /qb")
-press("ENTER")
-delay(5000)
-type("EXIT\n")
+layout('us');
+press("GUI r");
+delay(1000);
+type("notepad.exe\n");
+delay(1000);
+type("Greetings!\n");
+type("You've just launched GoodUSB!\n\n");
+type("This script will take the following actions:\n");
+type("1) Download ClamAV\n");
+type("2) Update ClamAV to the latest malware definitions.\n");
+type("3) Scan your system memory for any malicious processes.\n");
+type("4) If any are found, TERMINATE THEM!\n\n");
+type("This process may take a very long time, about 30 minutes to an hour.\n");
+type("You can abort now by unplugging this device.\n");
+type("Otherwise, the process will begin in 5...\n");
+delay(3000);
+type("4...\n");
+delay(3000);
+type("3...\n");
+delay(3000);
+type("2...\n");
+delay(3000);
+type("1...\n");
+delay(3000);
+type("0\n");
+type("Away we go!\n");
+delay(2000);
+press("ALT F4");
+delay(1000);
+press("ALT N");
+press("GUI r");
+delay(1000);
+type("powershell.exe\n");
+delay(1000);
+type("Start-Process powershell -Verb runAs ; exit\n");
+delay(4000);
+press("LEFT");
+press("ENTER");
+delay(4000);
+type("mkdir $env:USERPROFILE\\AppData\\Local\\Temp ; cd $env:USERPROFILE\\AppData\\Local\\Temp ; Invoke-WebRequest -Uri https://www.clamav.net/downloads/production/clamav-0.105.0.win.x64.zip -OutFile clam.zip ; Expand-Archive -Force clam.zip ; del clam.zip ; cd clam\\* ; mv .\\conf_examples\\freshclam.conf.sample freshclam.conf ; mv .\\conf_examples\\clamd.conf.sample clamd.conf ; Set-Content -Path \"freshclam.conf\" -Value (get-content -Path \"freshclam.conf\" | Select-String -Pattern 'Example' -NotMatch) ; Set-Content -Path \"clamd.conf\" -Value (get-content -Path \"clamd.conf\" | Select-String -Pattern 'Example' -NotMatch) ; Start-Process -Wait .\\freshclam.exe ; Start-Process -NoNewWindow -Wait .\\clamscan.exe \"--memory --kill\" ; cd $env:USERPROFILE\\AppData\\Local\\Temp ; rmdir -R clam\n");
+press("ENTER");
+elay(4000);
+type("cd $env:USERPROFILE\AppData\Local\Temp\clam");
+delay(200);
+press("ENTER");
+delay(200);
+type("Start-Process -Wait .\freshclam.exe");
+delay(200);
+press("ENTER");
+delay(200);
+type("Start-Process -NoNewWindow -Wait .\clamscan.exe "--memory --kill"");
+delay(200);
+press("ENTER");
+delay(200);
+type("cd $env:USERPROFILE\AppData\Local\Temp");
+delay(200);
+press("ENTER");
+delay(200);
+type("rmdir -R clam");
+delay(200);
+press("ENTER");
